@@ -20,6 +20,7 @@ app.use(bearerToken())
 
 // body parser
 app.use(bodyParser.json())
+app.use(bodyParser.urlencoded({ extended: false }))
 
 // enable cors on all requests
 app.use(cors())
