@@ -2,6 +2,7 @@ const express = require('express')
 const bodyParser = require('body-parser')
 const bearerToken = require('express-bearer-token')
 const cors = require('cors')
+const fileUpload = require('express-fileupload')
 
 // import env variables
 require('dotenv').config()
@@ -18,9 +19,10 @@ app.use('/docs', swaggerUi.serve, swaggerUi.setup(swaggerDocument))
 // bearer token
 app.use(bearerToken())
 
-// body parser
+// parsin
 app.use(bodyParser.json())
-app.use(bodyParser.urlencoded({ extended: false }))
+app.use(bodyParser.urlencoded())
+app.use(fileUpload())
 
 // enable cors on all requests
 app.use(cors())
