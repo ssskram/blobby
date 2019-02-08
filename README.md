@@ -10,4 +10,4 @@ Bearer token.  Just ask for it
 
 Swagger UI:
 
-https://blobby.azurewebsites.us/docs# blobby
+https://blobby.azurewebsites.us/docs

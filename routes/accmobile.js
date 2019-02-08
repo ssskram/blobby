@@ -3,28 +3,17 @@
 
 const express = require('express')
 const router = express.Router()
-const dt = require("node-json-transform").DataTransform
 const fetch = require("node-fetch")
-const models = require('../models/facilities')
 const checkToken = require('../token')
 
 global.Headers = fetch.Headers
 
-// return all facilities
-router.get('/allFacilities',
+// post image to accmobile container
+router.post('/image',
   function (req, res) {
     const valid = (checkToken(req.token))
     if (valid == true) {
-      fetch("https://cgweb06.cartegraphoms.com/PittsburghPA/api/v1/Classes/cgFacilitiesClass?fields=Oid,CgShape,IDField,NeighborhoodField,InactiveField&filter=(([Inactive] is equal to false))", {
-          method: 'get',
-          headers: new Headers({
-            'Authorization': 'Basic ' + process.env.CART
-          })
-        })
-        .then(res => res.json())
-        .then(data => {
-          res.status(200).send(dt(data, models.allFacilities).transform())
-        })
+      // here
     } else res.status(403).end()
   }
 )
