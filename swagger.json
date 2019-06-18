@@ -1,21 +1,106 @@
 {
-    "swagger": "2.0",
-    "info": {
-        "title": "Blobby",
-        "description": "Proxy for blob storage",
-        "version": "1.0.0"
-    },
-    "host": "blobby.azurewebsites.us",
-    "schemes": [
-        "https"
-    ],
-    "securityDefinitions": {
-        "Bearer": {
-            "type": "apiKey",
-            "name": "Authorization",
-            "in": "header"
-        }
-    },
-    "paths": {
+  "swagger": "2.0",
+  "info": {
+    "title": "Blobby",
+    "description": "Proxy for blob storage",
+    "version": "1.0.0"
+  },
+  "host": "blobby.azurewebsites.us",
+  "schemes": ["https"],
+  "securityDefinitions": {
+    "Bearer": {
+      "type": "apiKey",
+      "name": "Authorization",
+      "in": "header"
     }
+  },
+  "paths": {
+    "/accmobile/image": {
+      "post": {
+        "tags": ["ACC Mobile"],
+        "security": [
+          {
+            "Bearer": []
+          }
+        ],
+        "summary": "Post image",
+        "description": "Saves an image to blob",
+        "parameters": [
+          {
+            "name": "filename",
+            "in": "query",
+            "description": "Name of image",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "file",
+            "in": "file",
+            "description": "Image",
+            "required": true,
+            "type": "stream"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success!"
+          },
+          "403": {
+            "description": "Access Denied"
+          },
+          "500": {
+            "description": "Server Error",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "Error": {
+                  "type": "string"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/accmobile/deleteImage": {
+        "get": {
+          "tags": ["ACC Mobile"],
+          "security": [
+            {
+              "Bearer": []
+            }
+          ],
+          "summary": "Delete image",
+          "description": "Deletes an image from blob",
+          "parameters": [
+            {
+              "name": "blobName",
+              "in": "query",
+              "description": "Name of blob",
+              "required": true,
+              "type": "string"
+            }
+          ],
+          "responses": {
+            "200": {
+              "description": "Success!"
+            },
+            "403": {
+              "description": "Access Denied"
+            },
+            "500": {
+              "description": "Server Error",
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "Error": {
+                    "type": "string"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+  }
 }
