@@ -18,7 +18,9 @@ router.post("/image", (req, res) => {
     error => {
       if (!error) {
         res.status(200).send();
-      } else res.status(500).send(error);
+      } else {
+        res.status(500).send(error);
+      }
     }
   );
 });

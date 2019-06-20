@@ -1,6 +1,7 @@
 const express = require("express");
 const bodyParser = require("body-parser");
 const bearerToken = require("express-bearer-token");
+const fileupload = require("express-fileupload");
 const cors = require("cors");
 const swaggerUi = require("swagger-ui-express");
 const swaggerDocument = require("./swagger.json");
@@ -39,6 +40,9 @@ app.use((req, res, next) => {
     res.status(403).end();
   }
 });
+
+// handle multipart data
+app.use(fileupload());
 
 // routes
 app.use("/accMobile", require("./routes/accmobile"));
